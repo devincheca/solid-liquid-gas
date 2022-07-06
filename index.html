@@ -33,6 +33,7 @@
         background-attachment: fixed;                                          
         min-height: 85%;
       }
+      .grid-item { width: 20%; }
     </style>
   </head>
   <body>
@@ -41,6 +42,37 @@
         <h1 class="col">Sarah Lyn Guillen</h1>
       </div>
     </div>
+    <div class="grid">
+      <div class="grid-item">
+        <img src="images/ALCcoverpage1.jpg" />
+      </div>
+      <div class="grid-item grid-item--width2">
+        <img src="images/ALCcoverpage2.jpg" />
+      </div>
+      <div class="grid-item">
+      </div>
+    </div>
+    <script>
+      const elem = document.querySelector('.grid');
+      const appendItem = ({ src }) => {
+        const item = document.createElement('div');
+        item.className = 'grid-item';
+        const image = document.createElement('img');
+        image.src = src;
+        item.appendChild(image);
+        elem.appendChild(item);
+      };
+      const getImages = async () => {
+        const imageList = await fetch('/images/manifest.json');
+        imageList.map(({ fileName }) => appendItem(fileName));
+      };
+      getImages.then(() => {
+        const msnry = new Masonry(elem, {
+          itemSelector: '.grid-item',
+          columnWidth: 200
+        });
+      });
+    </script>
   </body>
 </html>
 
