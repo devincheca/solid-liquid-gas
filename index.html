@@ -75,12 +75,12 @@
         elem.appendChild(item);
       };
       const getImages = async () => {
-        const manifest = await fetch('/images/manifest.json');
+        const manifest = await fetch('https://sarahlynguillen.com/images/manifest.json');
         const imageList = await manifest.json();
-        imageList.map(fileName => appendItem({ src: `images/${fileName}` }));
+        imageList.map(fileName => appendItem({ src: `https://sarahlynguillen.com/images/${fileName}` }));
         const msnry = new Masonry(elem, {
           itemSelector: '.grid-item',
-          columnWidth: 200
+          columnWidth: 100
         });
       };
       getImages();
