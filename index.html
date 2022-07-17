@@ -63,15 +63,15 @@
         elem.appendChild(item);
       };
       const getImages = async () => {
-        const imageList = await fetch('/images/manifest.json');
+        const manifest = await fetch('/images/manifest.json');
+        const imageList = await manifest.json();
         imageList.map(({ fileName }) => appendItem(fileName));
-      };
-      getImages.then(() => {
         const msnry = new Masonry(elem, {
           itemSelector: '.grid-item',
           columnWidth: 200
         });
-      });
+      };
+      getImages();
     </script>
   </body>
 </html>
