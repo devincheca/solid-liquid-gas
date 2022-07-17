@@ -6,7 +6,7 @@
     <meta name="keywords" content="Sarah Lyn Guillen, Storyboard, Story board, Art">
     <link href="bootstrap.min.css" rel="stylesheet">
     <script src="bootstrap.bundle.min.js"></script>
-    <script src="masonry.js"></script>
+    <!-- <script src="masonry.js"></script> -->
     <!-- <link rel="icon" type="image/png" href="devinchecaLogo.png"> -->
     <style>
       .schoolImages {
@@ -33,7 +33,16 @@
         background-attachment: fixed;                                          
         min-height: 85%;
       }
-      .grid-item { width: 20%; }
+      .grid-row {
+        display: flex;
+        max-height: 50vh;
+      }
+      .grid-row > * { text-align: center; }
+      .box-1 { flex-grow: 1; }
+      .box-2 { flex-grow: 2; }
+      .box-3 { flex-grow: 3; }
+      .box-4 { flex-grow: 4; }
+      .box-5 { flex-grow: 5; }
     </style>
   </head>
   <body>
@@ -42,46 +51,53 @@
         <h1 class="col">Sarah Lyn Guillen</h1>
       </div>
     </div>
-    <!--
-    <div class="grid">
-      <div class="grid-item">
-        <img src="images/ALCcoverpage1.jpg" />
-      </div>
-      <div class="grid-item grid-item--width2">
-        <img src="images/ALCcoverpage2.jpg" />
-      </div>
-      <div class="grid-item">
-      </div>
-    </div>
-    -->
-
-    <div class="grid">
-      <div class="grid-item">
-      </div>
-      <div class="grid-item grid-item--width2">
-      </div>
-      <div class="grid-item">
-      </div>
-    </div>
-
+    <div class="grid"></div>
     <script>
+      const imagePath = 'https://sarahlynguillen.com/images/';
       const elem = document.querySelector('.grid');
-      const appendItem = ({ src }) => {
-        const item = document.createElement('div');
-        item.className = 'grid-item';
-        const image = document.createElement('img');
-        image.src = src;
-        item.appendChild(image);
-        elem.appendChild(item);
+      const getRowSpan = () => {
+        const betweenOneAndFive = Math.floor((Math.random() * 10) / 2);
+        return betweenOneAndFive > 0 ? betweenOneAndFive : getRowSpan();
+      };
+      const getRowWidths = (arr = []) => {
+        arr.push({ width: getRowSpan() });
+        return arr.reduce((sum, { width }) => width + sum, 0) >= 5 ? arr : getRowWidths(arr);
+      };
+      const getBox = ({ width }) => {
+        const box = document.createElement('div');
+        box.className = `box-${width}`;
+        return box;
+      };
+      const getNewRowDiv = () => {
+        const row = document.createElement('div');
+        row.className = 'grid-row';
+        return row;
       };
       const getImages = async () => {
-        const manifest = await fetch('https://sarahlynguillen.com/images/manifest.json');
+        const manifest = await fetch(`${imagePath}manifest.json`);
         const imageList = await manifest.json();
-        imageList.map(fileName => appendItem({ src: `https://sarahlynguillen.com/images/${fileName}` }));
-        const msnry = new Masonry(elem, {
-          itemSelector: '.grid-item',
-          columnWidth: 100
-        });
+        const current = {
+          row: getRowWidths(),
+          index: 0,
+          rowDiv: getNewRowDiv(),
+        };
+        imageList
+          .map(fileName => {
+            const { width } = current.row[current.index]
+            const newBox = getBox({ width });
+            const image = document.createElement('img');
+            image.src = `${imagePath}${fileName}`;
+            image.style.height = '50vh';
+            newBox.appendChild(image);
+            current.rowDiv.appendChild(newBox);
+            current.index = current.index + 1;
+            if (current.index === current.row.length) {
+              elem.appendChild(current.rowDiv);
+              current.row = getRowWidths();
+              current.index = 0;
+              current.rowDiv = getNewRowDiv();
+            }
+          });
       };
       getImages();
     </script>
