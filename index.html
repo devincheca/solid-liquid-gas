@@ -43,15 +43,37 @@
       .box-3 { flex-grow: 3; }
       .box-4 { flex-grow: 4; }
       .box-5 { flex-grow: 5; }
+      .top-banner {
+        margin: initial;
+        padding: .5em;
+        width: 100%;
+      }
+      .header-height {
+        height: 10vh;
+      }
+      .grid-height {
+        overflow: scroll;
+        height: 80vh;
+      }
+      .footer-height {
+        height: 10vh;
+      }
+      .bottom-footer {
+        background: mistyrose;
+        display: grid;
+        place-items: end;
+        padding: .5em;
+      }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <h1 class="col">Sarah Lyn Guillen</h1>
-      </div>
+    <div class="header-height">
+      <h1 class="top-banner">Sarah Lyn Guillen</h1>
     </div>
-    <div class="grid"></div>
+    <div class="grid grid-height"></div>
+    <div class="footer-height bottom-footer">
+      <h5 class="">mail@email.com</h5>
+    </div>
     <script>
       const imagePath = 'https://sarahlynguillen.com/images/';
       const elem = document.querySelector('.grid');
@@ -61,7 +83,10 @@
       };
       const getRowWidths = (arr = []) => {
         arr.push({ width: getRowSpan() });
-        return arr.reduce((sum, { width }) => width + sum, 0) >= 5 ? arr : getRowWidths(arr);
+        const colSum = arr.reduce((sum, { width }) => width + sum, 0);
+        if (colSum === 5) return arr;
+        if (colSum < 5) return arr.concat([{ width: 5 - colSum }]);
+        if (colSum > 5) return arr.filter((_, i) => i <= arr.length);
       };
       const getBox = ({ width }) => {
         const box = document.createElement('div');
