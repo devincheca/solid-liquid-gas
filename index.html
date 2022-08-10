@@ -9,6 +9,13 @@
     <!-- <script src="masonry.js"></script> -->
     <!-- <link rel="icon" type="image/png" href="devinchecaLogo.png"> -->
     <style>
+      :root {
+        --primary: #FFE4E1;
+        --secondary: #FFB6AE;
+        --alt: #FFCDC8;
+        --highlight: #FFFBFB;
+        --dark: #FF9F95;
+      }
       .schoolImages {
         max-height: 2em;
         position: relative;
@@ -44,12 +51,9 @@
       .box-4 { flex-grow: 4; }
       .box-5 { flex-grow: 5; }
       .top-banner {
-        margin: initial;
+        margin: auto;
         padding: .5em;
         width: 100%;
-      }
-      .header-height {
-        height: 10vh;
       }
       .grid-height {
         overflow: scroll;
@@ -59,16 +63,54 @@
         height: 10vh;
       }
       .bottom-footer {
-        background: mistyrose;
+        background: var(--primary);
         display: grid;
         place-items: end;
         padding: .5em;
       }
+      #gallery-loader {
+        text-align: center;
+        position: fixed;
+        top: 50vh;
+        left: 50vw;
+      }
+      .spinner-border.text-primary {
+        color: var(--primary) !important;
+      }
+      .spinner-border.text-secondary {
+        color: var(--secondary) !important;
+      }
+      .spinner-border.text-success {
+        color: var(--alt) !important;
+      }
+      .spinner-border.text-danger {
+        color: var(--highlight) !important;
+      }
+      .spinner-border.text-dark {
+        color: var(--dark) !important;
+      }
     </style>
   </head>
   <body>
-    <div class="header-height">
+    <div>
       <h1 class="top-banner">Sarah Lyn Guillen</h1>
+    </div>
+    <div id="gallery-loader">
+      <div class="spinner-border text-danger" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <div class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <div class="spinner-border text-success" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <div class="spinner-border text-secondary" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <div class="spinner-border text-dark" role="status">
+        <span class="sr-only"></span>
+      </div>
     </div>
     <div class="grid grid-height"></div>
     <div class="footer-height bottom-footer">
@@ -98,6 +140,12 @@
         row.className = 'grid-row';
         return row;
       };
+      const toggleLoader = () => {
+        const loader = document.getElementById('gallery-loader');
+        loader.style.display = loader.style.display === 'none'
+          ? 'block'
+          : 'none';
+      };
       const getImages = async () => {
         const manifest = await fetch(`${imagePath}manifest.json`);
         const imageList = await manifest.json();
@@ -126,6 +174,7 @@
               current.rowDiv = getNewRowDiv();
             }
           });
+        toggleLoader();
       };
       getImages();
     </script>
