@@ -50,6 +50,19 @@
       .box-3 { flex-grow: 3; }
       .box-4 { flex-grow: 4; }
       .box-5 { flex-grow: 5; }
+      .collage-img {
+        height: 50vh;
+      }
+      @media only screen and (max-width: 576px) {
+        .grid-row { display: block; }
+        .box-1, .box-2, .box-3, .box-4, .box-5, .box-6 {
+          display: block;
+        }
+        .collage-img {
+          height: initial;
+          width: 100%;
+        }
+      }
       .top-banner {
         margin: auto;
         padding: .5em;
@@ -60,7 +73,10 @@
         height: 80vh;
       }
       .footer-height {
+        position: fixed;
+        bottom: 0;
         height: 10vh;
+        width: 100%;
       }
       .bottom-footer {
         background: var(--primary);
@@ -154,26 +170,45 @@
           index: 0,
           rowDiv: getNewRowDiv(),
         };
-        imageList
+        const shuffledImageList = imageList
           .map(value => ({ value, sort: Math.random() }))
           .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value)
-          .map(fileName => {
-            const { width } = current.row[current.index]
-            const newBox = getBox({ width });
-            const image = document.createElement('img');
-            image.src = `${imagePath}${fileName}`;
-            image.style.height = '50vh';
-            newBox.appendChild(image);
-            current.rowDiv.appendChild(newBox);
-            current.index = current.index + 1;
-            if (current.index === current.row.length) {
+          .map(({ value }) => value);
+        if (screen.availWidth > 576) {
+          shuffledImageList
+            .map(fileName => {
+              const { width } = current.row[current.index];
+              const newBox = getBox({ width });
+              const image = document.createElement('img');
+              image.src = `${imagePath}${fileName}`;
+              image.className = 'collage-img';
+              newBox.appendChild(image);
+              current.rowDiv.appendChild(newBox);
+              current.index = current.index + 1;
+              if (current.index === current.row.length) {
+                elem.appendChild(current.rowDiv);
+                current.row = getRowWidths();
+                current.index = 0;
+                current.rowDiv = getNewRowDiv();
+              }
+            });
+        } else {
+          shuffledImageList
+            .map(fileName => {
+              const { width } = current.row[current.index];
+              const newBox = getBox({ width });
+              const image = document.createElement('img');
+              image.src = `${imagePath}${fileName}`;
+              image.className = 'collage-img';
+              newBox.appendChild(image);
+              current.rowDiv.appendChild(newBox);
+              current.index = current.index + 1;
               elem.appendChild(current.rowDiv);
               current.row = getRowWidths();
               current.index = 0;
               current.rowDiv = getNewRowDiv();
-            }
-          });
+            });
+        }
         toggleLoader();
       };
       getImages();
