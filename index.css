@@ -1,0 +1,97 @@
+:root {
+  --primary: #FFE4E1;
+  --secondary: #FFB6AE;
+  --alt: #FFCDC8;
+  --highlight: #FFFBFB;
+  --dark: #FF9F95;
+}
+.schoolImages {
+  max-height: 2em;
+  position: relative;
+  top: -.25em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.logoImageDiv {
+  display: flex;
+  justify-content: space-between;
+}
+* { border-radius: .25em; }
+a { text-decoration: none; }
+a { cursor: pointer; }
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("bgImg.jpg");
+  background-attachment: fixed;                                          
+  min-height: 85%;
+}
+.grid-row {
+  display: flex;
+  max-height: 50vh;
+}
+.grid-row > * { text-align: center; }
+.box-1 { flex-grow: 1; }
+.box-2 { flex-grow: 2; }
+.box-3 { flex-grow: 3; }
+.box-4 { flex-grow: 4; }
+.box-5 { flex-grow: 5; }
+.collage-img {
+  height: 50vh;
+}
+@media only screen and (max-width: 576px) {
+  .grid-row { display: block; }
+  .box-1, .box-2, .box-3, .box-4, .box-5, .box-6 {
+    display: block;
+  }
+  .collage-img {
+    height: initial;
+    width: 100%;
+  }
+}
+.top-banner {
+  margin: auto;
+  padding: .5em;
+  width: 100%;
+}
+.grid-height {
+  overflow: scroll;
+  height: 80vh;
+}
+.footer-height {
+  position: fixed;
+  bottom: 0;
+  height: 10vh;
+  width: 100%;
+}
+.bottom-footer {
+  background: var(--primary);
+  display: grid;
+  place-items: end;
+  padding: .5em;
+}
+#gallery-loader {
+  text-align: center;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+}
+.spinner-border.text-primary {
+  color: var(--primary) !important;
+}
+.spinner-border.text-secondary {
+  color: var(--secondary) !important;
+}
+.spinner-border.text-success {
+  color: var(--alt) !important;
+}
+.spinner-border.text-danger {
+  color: var(--highlight) !important;
+}
+.spinner-border.text-dark {
+  color: var(--dark) !important;
+}
+
