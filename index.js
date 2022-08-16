@@ -2,7 +2,8 @@ const fs = require('fs');
 const path = require('path');
 
 const manifest = 'manifest.json';
-const imageFolder = 'images';
+const imageFolder = 'digital';
+// const imageFolder = 'images';
 const filePath = `/${imageFolder}/${manifest}`;
 const directoryPath = path.join(__dirname, `/${imageFolder}`);
 
