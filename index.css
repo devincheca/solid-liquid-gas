@@ -29,6 +29,7 @@ a:active { text-decoration: none; }
   background-attachment: fixed;                                          
   min-height: 85%;
 }
+.grid { background-color: white; }
 .grid-row {
   display: flex;
   max-height: 50vh;

@@ -10,14 +10,31 @@
     <!-- <link rel="icon" type="image/png" href="devinchecaLogo.png"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="index.css" rel="stylesheet">
+    <link href="nav.css" rel="stylesheet">
     <script src="images.load.js" defer></script>
-    <!-- use the first one in this for the navigation, looks really neat how the css does things -->
+    <!-- using the first hit here for the navigation -->
     <!-- https://1stwebdesigner.com/pure-css-navigation-menus/ -->
   </head>
   <body>
     <div>
+      <input type="checkbox" id="overlay-input" />
+    <!--
+      <label for="overlay-input" id="overlay-button"><span></span></label>
+    -->
+      <div id="overlay">
+        <div onclick="closeNav()">X</div>
+        <ul>
+          <li><a href="#" onclick="closeNav()">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div>
       <h1 class="top-banner">
-        <i class="fa fa-bars"></i>
+        <label for="overlay-input" id="overlay-button">
+          <i class="fa fa-bars"></i>
+        </label>
         <span>Sarah Lyn Guillen</span>
       </h1>
     </div>
@@ -43,6 +60,9 @@
       <i class="fa fa-linkedin-square"></i>
       <h5>salyngui469@yahoo.com</h5>
     </div>
+    <script>
+      const closeNav = () => document.getElementById("overlay-input").click();
+    </script>
   </body>
 </html>
 
