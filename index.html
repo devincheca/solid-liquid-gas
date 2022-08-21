@@ -18,7 +18,7 @@
     <div>
       <input type="checkbox" id="overlay-input" />
       <div id="overlay">
-        <div onclick="() => document.getElementById("overlay-input").click()">X</div>
+        <div onclick="onNavClose()">X</div>
         <ul id="nav-ul"></ul>
       </div>
     </div>
@@ -56,6 +56,9 @@
       </div>
       <h5>salyngui469@yahoo.com</h5>
     </div>
+    <script>
+      const onNavClose = () => document.getElementById("overlay-input").click();
+    </script>
   </body>
 </html>
 
