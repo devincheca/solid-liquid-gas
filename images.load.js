@@ -61,15 +61,17 @@ const getImages = async () => {
       });
   } else {
     shuffledImageList
-      .map(fileName => {
+      .map(({ fileName, isNewLine }) => {
         const { width } = current.row[current.index];
         const newBox = getBox({ width });
         const image = document.createElement('img');
-        image.src = `${imagePath}${fileName}`;
-        image.className = 'collage-img';
-        newBox.appendChild(image);
-        current.rowDiv.appendChild(newBox);
-        current.index = current.index + 1;
+        if (!isNewLine) {
+          image.src = `${imagePath}${fileName}`;
+          image.className = 'collage-img';
+          newBox.appendChild(image);
+          current.rowDiv.appendChild(newBox);
+          current.index = current.index + 1;
+        }
         elem.appendChild(current.rowDiv);
         current.row = getRowWidths();
         current.index = 0;

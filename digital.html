@@ -12,23 +12,15 @@
     <link href="index.css" rel="stylesheet">
     <link href="nav.css" rel="stylesheet">
     <script src="digital.load.js" defer></script>
-    <!-- using the first hit here for the navigation -->
-    <!-- https://1stwebdesigner.com/pure-css-navigation-menus/ -->
+    <script src="nav.js" defer></script>
+    <script src="footer.js" defer></script>
   </head>
   <body>
     <div>
       <input type="checkbox" id="overlay-input" />
-    <!--
-      <label for="overlay-input" id="overlay-button"><span></span></label>
-    -->
       <div id="overlay">
-        <div onclick="closeNav()">X</div>
-        <ul>
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#" onclick="closeNav()">Digital Portfolio</a></li>
-          <li><a href="./trad.html">Traditional Portfolio</a></li>
-        </ul>
+        <div onclick="onNavClose()">X</div>
+        <ul id="nav-ul"></ul>
       </div>
     </div>
     <div>
@@ -58,11 +50,11 @@
     </div>
     <div class="grid grid-height"></div>
     <div class="footer-height bottom-footer">
-      <i class="fa fa-linkedin-square"></i>
+      <div class="external-icons"></div>
       <h5>salyngui469@yahoo.com</h5>
     </div>
     <script>
-      const closeNav = () => document.getElementById("overlay-input").click();
+      const onNavClose = () => document.getElementById("overlay-input").click();
     </script>
   </body>
 </html>
