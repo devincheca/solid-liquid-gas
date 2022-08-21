@@ -104,4 +104,10 @@ a:active { text-decoration: none; }
 .webtoon-icon {
   width: 14px;
 }
+.icon-anchor {
+  color: initial;
+}
+.icon-anchor:hover {
+  color: --var(dark);
+}
 
