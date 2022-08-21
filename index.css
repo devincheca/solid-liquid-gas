@@ -96,3 +96,9 @@ a:active { text-decoration: none; }
   color: var(--dark) !important;
 }
 
+.external-icons {
+  display: flex;
+  gap: 1em;
+  justify-content: end;
+}
+
