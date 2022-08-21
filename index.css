@@ -101,4 +101,7 @@ a:active { text-decoration: none; }
   gap: 1em;
   justify-content: end;
 }
+.webtoon-icon {
+  width: 14px;
+}
 
