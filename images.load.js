@@ -27,6 +27,12 @@ const toggleLoader = () => {
     ? 'block'
     : 'none';
 };
+const getImageElement = (src) => {
+  const image = document.createElement('img');
+  image.src = src;
+  image.className = 'collage-img';
+  return image;
+}
 const getImages = async () => {
   const manifest = await fetch(`${imagePath}manifest.json`);
   const imageList = await manifest.json();
@@ -35,49 +41,35 @@ const getImages = async () => {
     index: 0,
     rowDiv: getNewRowDiv(),
   };
-  const shuffledImageList = imageList
+  const resetCurrent = () => {
+    current.row = getRowWidths();
+    current.index = 0;
+    current.rowDiv = getNewRowDiv();
+  };
+  const isDesktop = screen.availWidth > 576;
+  const carriageReturn = () => {
+    elem.appendChild(current.rowDiv);
+    resetCurrent();
+  };
+  const appendAndReset = () => {
+    if (isDesktop) {
+      if (current.index === current.row.length) carriageReturn();
+    } else carriageReturn();
+  };
+  imageList
     .map(value => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
-    .map(({ value }) => value);
-  if (screen.availWidth > 576) {
-    shuffledImageList
-      .map(({ fileName, isNewLine }) => {
-        const { width } = current.row[current.index];
-        const newBox = getBox({ width });
-        const image = document.createElement('img');
-        if (!isNewLine) {
-          image.src = `${imagePath}${fileName}`;
-          image.className = 'collage-img';
-          newBox.appendChild(image);
-          current.rowDiv.appendChild(newBox);
-          current.index = current.index + 1;
-        }
-        if (current.index === current.row.length) {
-          elem.appendChild(current.rowDiv);
-          current.row = getRowWidths();
-          current.index = 0;
-          current.rowDiv = getNewRowDiv();
-        }
-      });
-  } else {
-    shuffledImageList
-      .map(({ fileName, isNewLine }) => {
-        const { width } = current.row[current.index];
-        const newBox = getBox({ width });
-        const image = document.createElement('img');
-        if (!isNewLine) {
-          image.src = `${imagePath}${fileName}`;
-          image.className = 'collage-img';
-          newBox.appendChild(image);
-          current.rowDiv.appendChild(newBox);
-          current.index = current.index + 1;
-        }
-        elem.appendChild(current.rowDiv);
-        current.row = getRowWidths();
-        current.index = 0;
-        current.rowDiv = getNewRowDiv();
-      });
-  }
+    .map(({ value }) => value)
+    .map(({ fileName, isNewLine }) => {
+      const { width } = current.row[current.index];
+      const newBox = getBox({ width });
+      if (!isNewLine) {
+        newBox.appendChild(getImageElement(`${imagePath}${fileName}`));
+        current.rowDiv.appendChild(newBox);
+        current.index = current.index + 1;
+      }
+      appendAndReset();
+    });
   toggleLoader();
 };
 getImages();
