@@ -1,4 +1,18 @@
-const imagePath = 'https://sarahlynguillen.com/images/';
+class ImagePathLookup {
+  constructor() {
+    this.index = 'https://sarahlynguillen.com/images/';
+    this.digital = 'https://sarahlynguillen.com/digital/';
+    this.trad = 'https://sarahlynguillen.com/images/';
+  }
+
+  get() {
+    const [_, __, fileName] = location.href.split('/');
+    if (!fileName) return this.index;
+    const [path] = fileName.split('.html');
+    return path ? this[path] : this.index;
+  }
+};
+const imagePath = new ImagePathLookup().get();
 const elem = document.querySelector('.grid');
 const getRowSpan = () => {
   const betweenOneAndFive = Math.floor((Math.random() * 10) / 2);
