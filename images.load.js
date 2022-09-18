@@ -1,12 +1,15 @@
 class ImagePathLookup {
-  constructor() {
-    this.index = 'https://sarahlynguillen.com/images/';
-    this.digital = 'https://sarahlynguillen.com/digital/';
-    this.trad = 'https://sarahlynguillen.com/images/';
-  }
+  index = 'https://sarahlynguillen.com/images/';
+  digital = 'https://sarahlynguillen.com/digital/';
+  trad = 'https://sarahlynguillen.com/images/';
+
+  constructor() {}
 
   get() {
-    const [_, __, fileName] = location.href.split('/');
+    const hrefArray = location.href.split('/');
+    const fileName = location.href.includes('https')
+      ? hrefArray[3]
+      : hrefArray[8];
     if (!fileName) return this.index;
     const [path] = fileName.split('.html');
     return path ? this[path] : this.index;
