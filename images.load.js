@@ -77,7 +77,7 @@ const getImages = async () => {
     .map(value => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
     .map(({ value }) => value)
-    .map(({ fileName, isNewLine }) => {
+    .map(({ fileName, isNewLine }, i) => {
       const { width } = current.row[current.index];
       const newBox = getBox({ width });
       if (!isNewLine) {
@@ -85,7 +85,7 @@ const getImages = async () => {
         current.rowDiv.appendChild(newBox);
         current.index = current.index + 1;
       }
-      appendAndReset();
+      i === imageList.length - 1 ? carriageReturn() : appendAndReset();
     });
   toggleLoader();
 };
