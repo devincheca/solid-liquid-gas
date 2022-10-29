@@ -10,9 +10,10 @@ class ImagePathLookup {
     const fileName = location.href.includes('https')
       ? hrefArray[3]
       : hrefArray[8];
-    if (!fileName) return this.index;
+    if (!fileName) return this.digital;
     const [path] = fileName.split('.html');
-    return path ? this[path] : this.index;
+    if (path === 'index') return this.digital;
+    return path ? this[path] : this.digital;
   }
 };
 const imagePath = new ImagePathLookup().get();
@@ -73,7 +74,8 @@ const getImages = async () => {
       if (current.index === current.row.length) carriageReturn();
     } else carriageReturn();
   };
-  elem.appendChild(document.getElementById('resume'));
+  const resumeDiv = document.getElementById('resume');
+  if (resumeDiv) elem.appendChild(document.getElementById('resume'));
   imageList
     .map(value => ({ value, sort: Math.random() }))
     .sort((a, b) => a.sort - b.sort)
