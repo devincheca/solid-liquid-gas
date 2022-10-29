@@ -10,10 +10,10 @@ const generateNav = () => {
   const navLis = [{
     name: 'Home',
     href: 'index.html',
-  }, {
+  }, /*{
     name: 'About Me',
     href: 'about.html',
-  }, {
+  }, */{
     name: 'Digital Portfolio',
     href: 'digital.html',
   }, {
