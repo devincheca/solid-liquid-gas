@@ -111,3 +111,9 @@ a:active { text-decoration: none; }
   color: --var(dark);
 }
 
+#resume {
+  padding: .25em;
+}
+#resume details {
+  padding: .25em;
+}
