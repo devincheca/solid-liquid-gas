@@ -114,6 +114,8 @@ a:active { text-decoration: none; }
 #resume {
   padding: .25em;
 }
-#resume details {
+#resume div {
   padding: .25em;
+  padding-top: .5em;
+  padding-left: .75em;
 }
