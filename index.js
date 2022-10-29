@@ -5,36 +5,38 @@ const sizeOf = require('image-size')
 const manifest = 'manifest.json';
 const imageFolders = ['images', 'digital'];
 
-imageFolders.map(imageFolder => {
-  const filePath = `/${imageFolder}/${manifest}`;
-  const directoryPath = path.join(__dirname, `/${imageFolder}`);
-  fs.unlink(`.${filePath}`, err => {
-    if (err) {
-      console.error(err);
-    }
-  
-    fs.readdir(directoryPath, (err, files) => {
+imageFolders
+  .filter(imageFolder => !imageFolder.includes('resume'))
+  .map(imageFolder => {
+    const filePath = `/${imageFolder}/${manifest}`;
+    const directoryPath = path.join(__dirname, `/${imageFolder}`);
+    fs.unlink(`.${filePath}`, err => {
       if (err) {
-        return console.log('Unable to scan directory: ' + err);
+        console.error(err);
       }
-  
-      const imageArray = files
-        .filter(fileName => !fileName.includes('json'))
-        .map(fileName => {
-          const { height, width } = sizeOf(`${imageFolder}/${fileName}`);
-          return {
-            fileName,
-            height,
-            width,
-            isNewLine: width > 1.5 * height,
-          };
+    
+      fs.readdir(directoryPath, (err, files) => {
+        if (err) {
+          return console.log('Unable to scan directory: ' + err);
+        }
+    
+        const imageArray = files
+          .filter(fileName => !fileName.includes('json'))
+          .map(fileName => {
+            const { height, width } = sizeOf(`${imageFolder}/${fileName}`);
+            return {
+              fileName,
+              height,
+              width,
+              isNewLine: width > 1.5 * height,
+            };
+          });
+    
+        fs.appendFile(`./${filePath}`, JSON.stringify(imageArray), err => {
+          if (err) throw err;
+          console.log('Image manifest is created successfully.');
         });
-  
-      fs.appendFile(`./${filePath}`, JSON.stringify(imageArray), err => {
-        if (err) throw err;
-        console.log('Image manifest is created successfully.');
       });
     });
   });
-});
 
