@@ -113,3 +113,9 @@ input[type=checkbox]:checked ~ #overlay-button span:after {
   right: 0;
 }
 
+.external-icons.nav {
+  bottom: 1em;
+  right: 3em !important;
+  font-size: .75em !important;
+  scale: 200%;
+}
