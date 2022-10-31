@@ -91,5 +91,6 @@ const getImages = async () => {
       i === imageList.length - 1 ? carriageReturn() : appendAndReset();
     });
   toggleLoader();
+  setTimeout(() => Array.from(document.getElementsByTagName('summary')).map(s => s.click()), 500);
 };
 getImages();
