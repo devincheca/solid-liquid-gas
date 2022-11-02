@@ -11,8 +11,9 @@ const generateFooter = () => {
     className: 'fa fa-deviantart',
     href: 'https://www.deviantart.com/norikotanaka469/gallery/all',
   }, {
-    className: 'fa fa-linkedin-square',
-    href: '',
+    className: 'indeed-icon',
+    src: 'indeedLogo/Favicon/PNG/favicon-512.png',
+    href: 'https://my.indeed.com/p/sarahg-q8rk0l9',
   }];
   Array.from(document.getElementsByClassName('external-icons'))
     .map(div => {
