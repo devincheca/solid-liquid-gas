@@ -1,7 +1,7 @@
 class ImagePathLookup {
-  index = 'https://sarahlynguillen.com/images/';
-  digital = 'https://sarahlynguillen.com/digital/';
-  trad = 'https://sarahlynguillen.com/images/';
+  index = 'https://www.sarahlynguillen.com/images/';
+  digital = 'https://www.sarahlynguillen.com/digital/';
+  trad = 'https://www.sarahlynguillen.com/images/';
 
   constructor() {}
 
