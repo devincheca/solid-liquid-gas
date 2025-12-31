@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>A Lost Connection</title>
+    <meta charset="utf-8"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="keywords" content="A Lost Connection, Storyboard, Story board, Art">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <script src="bootstrap.bundle.min.js"></script>
+    <!-- <script src="masonry.js"></script> -->
+    <!-- <link rel="icon" type="image/png" href="devinchecaLogo.png"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="index.css" rel="stylesheet">
+    <link href="nav.css" rel="stylesheet">
+    <script src="images.load.js" defer></script>
+    <script src="nav.js" defer></script>
+    <script src="footer.js" defer></script>
+  </head>
+  <body>
+    <div>
+      <input type="checkbox" id="overlay-input" />
+      <div id="overlay">
+        <div onclick="onNavClose()">X</div>
+        <ul id="nav-ul">
+          <div class="external-icons nav"></div>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <h1 class="top-banner">
+        <label for="overlay-input" id="overlay-button" style="display: none;">
+          <i class="fa fa-bars"></i>
+        </label>
+        <span>A Lost Connection</span>
+      </h1>
+    </div>
+    <div id="gallery-loader">
+    </div>
+    <div class="hero-main-panel">
+      <div class="hero-main-panel-1">
+        <div class="hero-main-panel-text">
+          A young adult web comic available on Webtoon and Tapas
+        </div>
+        <div class="hero-main-panel-text">
+          He loved her across oceans... now he'll chase her across lifetimes. An infamous 18th century pirate falls for a runaway concubine- but when she's captured and killed, he refuses to let go, and his quest for vengeance turns into a journey through time, immortality, and reincarnation. This isn't the end... it's just the beginning. How far would you go to find your soulmate? (Updates every Saturday 6pm)
+        </div>
+        <div id="comic-platforms">
+          <a class="icon-anchor" href="https://www.webtoons.com/en/creator/y9927">
+            <img class="webtoon-icon" src="https://webtoons-static.pstatic.net/image/favicon/favicon.ico?dt=2017082301">
+          </a>
+        </div>
+        <div id="social-platforms">
+        </div>
+      </div>
+    </div>
+    <div class="footer-height bottom-footer">
+      <div class="external-icons"></div>
+    </div>
+    <div id="resume">
+    </div>
+    <script>
+      const onNavClose = () => document.getElementById("overlay-input").click();
+    </script>
+  </body>
+</html>
+
