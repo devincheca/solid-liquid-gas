@@ -19,6 +19,9 @@ const generateNav = () => {
   }, {
     name: 'Traditional Portfolio',
     href: 'trad.html',
+  }, {
+    name: 'A Lost Connection',
+    href: 'https://alostconnection.sarahlynguillen.com/',
   }];
   navLis.map(({ name, href }) => {
     const navLi = document.createElement('li');
